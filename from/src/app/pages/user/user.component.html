@@ -1,0 +1,147 @@
+<div class="row">
+    <div class="col-md-12">
+        <form id="login-form" class="was-validated">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Persona</li>
+                        </ol>
+                    </nav>
+
+                    <div class="form-group">
+                        <label for="firtname">Firt Name</label>
+                        <i class="fa fa-key"></i>
+                        <input type="text" name="firtname" id="firtname" class="form-control" [(ngModel)]="firtname"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <i class="fa fa-key"></i>
+                        <input type="text" name="lastname" id="lastname" class="form-control" [(ngModel)]="lastname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <i class="fa fa-key"></i>
+                        <input type="email" name="email" id="email" class="form-control" [(ngModel)]="email" required readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <i class="fa fa-lock"></i>
+                        <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password" readonly
+                            required />
+                        <input type="hidden" name="id" id="id" class="form-control" [(ngModel)]="users_id" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page">Tarjeta de Credito</li>
+                        </ol>
+                    </nav>
+                    <div class="form-group">
+                        <label for="card_number">Card Number</label>
+                        <i class="fa fa-key"></i>
+                        <input type="text" name="card_number" id="card_number" class="form-control"
+                            [(ngModel)]="card_number" required placeholder="1234 5678 9012 3456" [textMask]="{mask: maskCardNumber}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="own">Owner</label>
+                        <i class="fa fa-key"></i>
+                        <input type="tecxt" name="own" id="own" class="form-control" [(ngModel)]="own" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">cvv</label>
+                        <i class="fa fa-key"></i>
+                        <input type="text" name="cvv" id="cvv" class="form-control" [(ngModel)]="cvv" required [textMask]="{mask: maskCvv}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="franchise">franchise</label>
+                        <i class="fa fa-key"></i>
+                        <select class="form-control" name="franchise" id="franchise" [(ngModel)]="franchise">
+                            <option value="VISA">VISA</option>
+                            <option value="MASTER CARD">MASTER CARD</option>
+                            <option value="AMERICAN EXPRESS">AMERICAN EXPRESS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiration">expiration</label>
+                        <i class="fa fa-lock"></i>
+                        <input type="text" name="expiration" id="expiration" class="form-control"
+                            [(ngModel)]="expiration" required placeholder="20/22" [textMask]="{mask: maskExp}"/>
+
+                            
+
+                        <input type="hidden" name="card_id" id="card_id" class="form-control" [(ngModel)]="card_id"
+                            required />
+                        <input type="hidden" name="users_id" id="users_id" class="form-control" [(ngModel)]="users_id"
+                            required />
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+
+                        <button type="button" (click)="limpiarCard()" class="btn btn-danger col-md-6">
+                            Limpiar</button>
+                        <button type="submit" (click)="registrar()" class="btn btn-primary col-md-6 ">
+                            Guardar</button>
+
+                    </div>
+                    <div class="col-md-2"></div>
+                
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Tarjetas de Credito</li>
+    </ol>
+</nav>
+
+<div class="table-responsive-sm">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">card_number</th>
+                <th scope="col">franchise</th>
+                <th scope="col">expiration</th>
+                <th scope="col">cvv</th>
+                <th scope="col">owner</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let field of fieldArray; let i = index">
+                <td>{{field.card_number}}</td>
+                <td>{{field.franchise}}</td>
+                <td>{{field.expiration}}</td>
+                <td>{{field.cvv}}</td>
+                <td>{{field.own}}</td>
+                <td>
+                    <button class="btn btn-lg btn-outline-primary" (click)="irEditar(field)">
+                        <span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z" />
+                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
+                            </svg>
+                        </span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
