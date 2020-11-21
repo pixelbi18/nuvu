@@ -51,7 +51,7 @@ module.exports = {
   mysql: {
     client: 'mysql',
     connection: {
-      host: Env.get('DB_HOST', 'pixelbi.con'),
+      host: Env.get('DB_HOST', 'pixelbi.co'),
       port: Env.get('DB_PORT', '3306'),
       user: Env.get('DB_USER', 'Pixelbic_let_me_app'),
       password: Env.get('DB_PASSWORD', 'PixelBI2018#'),

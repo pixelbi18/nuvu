@@ -6,11 +6,16 @@ class EmpresaController {
 
     
     async index ({ request, response }) {
-        let dataEmpresa = await Empresa.query().fetch()
-        return response.json(dataEmpresa)
+        let dataEmpresa = await Empresa.query().with('empresaSucursal').fetch();
+
+        response.status(200).json({
+            Mensaje: 'Listado de Empresas',
+            data: dataEmpresa
+        })
+
     }
     
-    async create ({ request, response}) {
+    async store ({ request, response}) {
 
         // @todo : hacer las validaciones de variables, validacion de existencia de registro
         // @todo : estandarizar la forma de respuesta del servicio ( mensaje y datos)
@@ -29,52 +34,89 @@ class EmpresaController {
         // realizamos la inserción de los datos
         await dataEmpresa.save ( dataEmpresa );
         // realizamos respuesta
-        return response.json(dataEmpresa)
+        response.status(201).json({
+            Mensaje: 'Empresa Creada',
+            data: dataEmpresa
+        })
+
         
     }
     
-    async buscar ({ request, response }) {
+    async buscar ({ request, response, params }) {
          // recibimos las variables del request
-        const { campo, valor } = request.all();
+        //const { campo, valor } = request.all();
+        let campo = params.campo;
+        let valor = params.valor;
         
-        // Instanciamos un objeto de empresa
-        const dataEmpresa =  new Empresa();
+         // Instanciamos un objeto de empresa
+        let dataEmpresa =  new Empresa();
 
-        
         // Intentamos hacer la respectiva busqueda
         try {
-            const dataEmpresa = await Empresa.findBy(campo, valor);
-            console.log(dataEmpresa)
+            
+            //dataEmpresa = await Empresa.findBy(campo, valor);
+            
+        
+            dataEmpresa = await Empresa
+                                    .query()
+                                    .where(campo, valor)
+                                    //.orWhere( 'email', 'contacto@pixelbi.co')
+                                    .with('empresaSucursal')
+                                    .fetch();
+
+            
+            
+           console.log(dataEmpresa)
         } catch (error) {
-            response.json({"mensaje" : "error"});
+            response.json({Mensaje : "Error"});
         }
 
-        return await dataEmpresa.empresaSucursal().fetch();
+        response.status(200).json({
+            Mensaje: 'Resultado Busqueda',
+            data: dataEmpresa
+        })
     }
 
-    * querySingle(request, response) {
-        const users = yield Empresa.query().where('telefono', '3115732418').first()
-        response.ok(Empresa)
-    }
-
-
-    async store ({ request, response }) {
+    
+    async show ({ params, request, response}) {
+        
+        response.status(200).json({
+            Mensaje: 'Datos Empresa',
+            data: request.post().empresa
+          })
     }
     
-    async show ({ params, request, response, view }) {
-    }
-    
 
-    async edit ({ params, request, response, view }) {
-
-        const dataempresa = await empresa.find(params.id)
-
-    }
-    
     async update ({ params, request, response }) {
+
+        const { tipo_documento,numero_documento,nombre,ubicacion,direccion,telefono,email, empresa } = request.post()
+
+        empresa.tipo_documento = tipo_documento;
+        empresa.numero_documento = numero_documento;
+        empresa.nombre = nombre;
+        empresa.ubicacion = ubicacion;
+        empresa.direccion = direccion;
+        empresa.telefono = telefono;
+        empresa.email = email;
+
+        await empresa.save()
+
+        response.status(200).json({
+            Mensaje: 'Actualización de empresa exitosa',
+            data: empresa
+        })
     }
     
-    async destroy ({ params, request, response }) {
+    async delete ( {request, response, params: { id } }) {
+        const { empresa } = request.post()
+
+        await empresa.delete()
+
+        response.status(200).json({
+            message: 'Empresa Eliminada',
+            id
+        })
+
     }
 
 }
