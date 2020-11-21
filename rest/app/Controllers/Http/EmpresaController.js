@@ -1,7 +1,7 @@
 'use strict'
 
 const Empresa = use('App/Models/Empresa');
-
+const AutorizacionService = use('App/Services/AutorizacionService')
 class EmpresaController {
 
     
@@ -42,15 +42,18 @@ class EmpresaController {
         
     }
     
-    async buscar ({ request, response, params }) {
+    async buscar ({ request, response, params, auth}) {
          // recibimos las variables del request
         //const { campo, valor } = request.all();
+        const user = await auth.getUser();
+        AutorizacionService.verificarPermiso(user);
+
         let campo = params.campo;
         let valor = params.valor;
         
          // Instanciamos un objeto de empresa
         let dataEmpresa =  new Empresa();
-
+        
         // Intentamos hacer la respectiva busqueda
         try {
             
@@ -66,7 +69,7 @@ class EmpresaController {
 
             
             
-           console.log(dataEmpresa)
+           
         } catch (error) {
             response.json({Mensaje : "Error"});
         }
@@ -78,8 +81,12 @@ class EmpresaController {
     }
 
     
-    async show ({ params, request, response}) {
+    async show ({ params, request, response, auth}) {
         
+       
+        const user = await auth.getUser();
+        AutorizacionService.verificarPermiso(user);
+
         response.status(200).json({
             Mensaje: 'Datos Empresa',
             data: request.post().empresa
@@ -107,10 +114,13 @@ class EmpresaController {
         })
     }
     
-    async delete ( {request, response, params: { id } }) {
-        const { empresa } = request.post()
+    async delete ( {auth, request, response, params: { id } }) {
+        const user = await auth.getUser();
 
-        await empresa.delete()
+        const { empresa } = request.post();
+
+        AutorizacionService.verificarPermiso(user);
+        await empresa.delete();
 
         response.status(200).json({
             message: 'Empresa Eliminada',

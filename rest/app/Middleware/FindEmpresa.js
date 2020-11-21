@@ -8,7 +8,7 @@ class FindEmpresa {
 
     if (!data) {
       return response.status(404).json({
-        message: 'Project not found.',
+        message: 'Empresa no encontrada.',
         id
       })
     }

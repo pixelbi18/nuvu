@@ -5,8 +5,11 @@ const user = use('App/Models/User')
 class UserController {
 
     async register({ request, auth, response }) {
+        const datos = request.only(['email', 'password'])
+        datos.username = datos.email;
+        console.log(datos);
         try {
-            const datos = request.only(['firt_name', 'last_name', 'email', 'password'])
+           
             //guardar usuario persona
             let userRetorno = await user.save(datos)
 
@@ -19,12 +22,12 @@ class UserController {
     }
 
     async actualizar({ request, auth, response }) {
-        const datos = request.only(['firt_name', 'last_name', 'email', 'id'])
+        const datos = request.only(['first_name', 'last_name', 'email', 'id'])
         try {
             let userRetorno =await user
                 .query()
                 .where('id', datos.id)
-                .update({ firt_name: datos.firt_name, last_name: datos.last_name })
+                .update({ first_name: datos.first_name, last_name: datos.last_name })
 
             return response.json({ "valid": true, "message": "Persona Actualizada", "data":userRetorno })
         } catch (e) {

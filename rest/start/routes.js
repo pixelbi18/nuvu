@@ -44,4 +44,4 @@ Route.group(() => {
   Route.patch('empresa/:id', 'ProjectController.update').middleware(['FindEmpresa'])
   //Borrar un registro
   Route.delete('empresa/:id', 'ProjectController.delete').middleware(['FindEmpresa'])
-}).prefix('api/v1/');
+}).prefix('api/v1/').middleware('auth');
