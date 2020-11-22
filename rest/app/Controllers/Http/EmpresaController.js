@@ -5,7 +5,8 @@ const AutorizacionService = use('App/Services/AutorizacionService')
 class EmpresaController {
 
     
-    async index ({ request, response }) {
+    async index ({ request, response, auth }) {
+
         let dataEmpresa = await Empresa.query().with('empresaSucursal').fetch();
 
         response.status(200).json({
@@ -61,11 +62,11 @@ class EmpresaController {
             
         
             dataEmpresa = await Empresa
-                                    .query()
-                                    .where(campo, valor)
-                                    //.orWhere( 'email', 'contacto@pixelbi.co')
-                                    .with('empresaSucursal')
-                                    .fetch();
+                                .query()
+                                .where(campo, valor)
+                                //.orWhere( 'email', 'contacto@pixelbi.co')
+                                .with('empresaSucursal')
+                                .fetch();
 
             
             

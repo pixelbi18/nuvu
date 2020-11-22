@@ -30,18 +30,19 @@ Route.post('/card/registro', 'CreditCardController.registro').middleware('auth')
 Route.post('/card/getByUserId', 'CreditCardController.getByUserId').middleware('auth')
 Route.post('/card/actualizar', 'CreditCardController.actualizar').middleware('auth')
 
+// Rutas de Empresa
 Route.group(() => {
   // Todos los registros
-  Route.get('empresa', 'EmpresaController.index');
+  Route.get('', 'EmpresaController.index');
   // Busqueda por ID
-  Route.get('empresa/:id', 'EmpresaController.show').middleware(['findEmpresa'])
+  Route.get('/:id', 'EmpresaController.show').middleware(['findEmpresa'])
   // Guardar un nuevo registro
-  Route.post('empresa/registro', 'EmpresaController.store');
+  Route.post('/registro', 'EmpresaController.store');
   //Busqueda general solo un campo y valor
-  Route.post('empresa/:campo/:valor', 'EmpresaController.buscar');
+  Route.post('/:campo/:valor', 'EmpresaController.buscar');
 
   //Actualizar un registro
-  Route.patch('empresa/:id', 'ProjectController.update').middleware(['FindEmpresa'])
+  Route.patch('/:id', 'EmpresaController.update').middleware(['findEmpresa'])
   //Borrar un registro
-  Route.delete('empresa/:id', 'ProjectController.delete').middleware(['FindEmpresa'])
-}).prefix('api/v1/').middleware('auth');
+  Route.delete('/:id', 'EmpresaController.delete').middleware(['findEmpresa'])
+}).prefix('api/v1/empresa').middleware('auth');
