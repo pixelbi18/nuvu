@@ -1,0 +1,43 @@
+
+<ion-header  translucent="true" >
+  <ion-toolbar translucent="true" no-padding style="background-color:white">
+
+    <ion-button size="small"  color="secondary" (click)="regresar()">
+      <ion-icon name="arrow-back-outline" style="color:white"></ion-icon>
+    </ion-button>
+
+
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <ion-button  size="small"  color="secondary" (click)="orientacionPantalla()" style="padding: left 100px;">
+      <ion-icon name="sync-outline" style="color:white"></ion-icon>&nbsp; Rotar
+    </ion-button>
+
+
+    <ion-img [src]="logoTitulo" class="logoTitulo" slot="end" style="padding: right 5px;"></ion-img>
+    <p slot="end">&nbsp;&nbsp;&nbsp;</p>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content class="ion-no-border" [fullscreen]="true" fullscreen>
+  <div *ngIf="!loading"><img src="/assets/img/loading.gif"></div>
+  <pdf-viewer *ngIf="esPdf===1" [src]="url2"
+              [render-text]="true"
+
+              [show-all]="true"
+              [zoom-scale]="'page-fit'"
+              [original-size]="false"
+              [zoom]="1"
+  ></pdf-viewer>
+
+  <div id="recurso" style="width: 0%; height: 0%; border: none;" no-padding class="ion-no-border"></div>
+
+
+  <iframe width="100%" height="100%" [src]="url2 |  safe: 'resourceUrl'" scrolling="auto" frameborder="0" *ngIf="esPdf===0" crossorigin></iframe>
+
+
+</ion-content>
+
+

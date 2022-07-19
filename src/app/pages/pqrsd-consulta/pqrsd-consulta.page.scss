@@ -1,0 +1,49 @@
+
+  #container {
+    padding: 5px;
+  }
+
+  ion-input, ion-select, ion-textarea{
+      border: solid 1px gray;
+      width:100%;
+   }
+
+
+
+    h3, .h3 {
+      font-size: 1.75rem;
+      color: #071D49;
+  }
+
+  h4, .h4 {
+    font-size: 1.25rem;
+    color: #071D49;
+  }
+
+  ion-card {
+
+    overflow: scroll
+  }
+
+  ion-grid {
+    overflow: scroll;
+  }
+
+  ion-card-content {
+    overflow: scroll
+  }
+
+
+  .claseMensajeError{
+    font-size: 1.2em; color: red;
+  }
+
+.bg-primary {
+    color: #fff;
+    background-color: #01B5E2;
+    padding: 0.5em
+}
+
+.negrita{
+  font-weight: bold;
+}

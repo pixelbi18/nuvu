@@ -1,0 +1,358 @@
+<ion-content [fullscreen]="true"  class="container">
+  <ion-card>
+
+    <ion-card-content>
+      <!-- <ion-tabs tabsPlacement="side">
+
+        <ion-tab-bar slot="top">
+          <ion-tab-button tab="../pqrsd-registro" class="tab-selected" (click)="limpiarFormulario()">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <ion-label>Registro</ion-label>
+          </ion-tab-button>
+          <ion-tab-button tab="pqrsd-consulta" (click)="limpiarFormulario()">
+            <ion-icon name="search-circle-outline"></ion-icon>
+            <ion-label>Consulta</ion-label>
+          </ion-tab-button>
+
+        </ion-tab-bar>
+      </ion-tabs>
+    -->
+
+      <ion-grid item-start>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" fill="outline" class="botonRegresar"  (click)="limpiarFormulario();" >
+              <ion-icon slot="end" name="document-text-outline"></ion-icon><br>
+                    <ion-label>Registro</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="full" color="medium" fill="clear" class="botonRegresar"  (click)="limpiarFormulario(); opcConsulta()" >
+              <ion-icon slot="end" name="search-circle-outline"></ion-icon><br>
+                    <ion-label>Consulta</ion-label>
+            </ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+      <span *ngIf="radicadoCreado === 0">
+
+
+      <h5><b>Registro con identidad reservada:</b></h5>
+      <p align="justify">Señor usuario si usted considera que su identidad debe mantenerse reservada por encontrarse en alguna de las circunstancias establecidas en el parágrafo del artículo 4 de la ley 1712/2014, deberá diligenciar su petición a través de este enlace
+        <br>
+        Consulte aquí los costos de reproducción de documentos que se expiden en la ANSV</p>
+
+      <p align="justify">
+        Si desea presentar PQRSD anónimas, se necesita considerar la aceptación de la siguiente normativa : artículo 38 de la Ley 190 de 1995; artículo 69; de la Ley 734 de 2002 y artículo 81 de la Ley 962 de 2005.
+      </p>
+
+      <form enctype="multipart/form-data" #myForm="ngForm" (ngSubmit)="guardarForm();">
+
+        <ion-grid item-start>
+          <ion-row>
+            <ion-col>
+              ¿Desea realizar su solicitud de forma anónima? *
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.anonimo" name="anonimo" placeholder="Seleccione un tipo de Solicitud" (ionChange)="operarAnonimo($event)">
+                <ion-select-option value=''>Seleccionar</ion-select-option>
+                <ion-select-option value='Si'>Si</ion-select-option>
+                <ion-select-option value='No'>No</ion-select-option>
+              </ion-select>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              Tipologías de PQRSD *
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.tdoc" name="tdoc" placeholder="Seleccione un tipo de Solicitud" (ionChange)="asuntoCambio($event)">
+                <ion-select-option value=''>Seleccionar</ion-select-option>
+                <ion-select-option value='40'>Petición</ion-select-option>
+                <ion-select-option value='45'>Queja/ Reclamo</ion-select-option>
+                <ion-select-option value='57'>Solicitud de información</ion-select-option>
+                <ion-select-option value='48'>Denuncias</ion-select-option>
+                <ion-select-option value='47'>Sugerencia / Propuesta</ion-select-option>
+              </ion-select>
+
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div *ngIf="asuntoSelected === '40'"><b>Petición:</b> Solicitud cuyo objeto es indagar sobre un hecho, acto o actuación administrativa que corresponde a la naturaleza y finalidad de la ANSV. Incluye solicitud de copias o documentos que reposen en los archivos de la Entidad.</div>
+              <div *ngIf="asuntoSelected === '45'"><b>Queja:</b> Se entiende por queja la manifestación de inconformidad, inquietud, insatisfacción, desagrado o descontento que un ciudadano pone en conocimiento de una entidad, relacionada con el cumplimiento de la misión de la Entidad, o, por conductas irregulares realizadas por sus servidores públicos, en cumplimiento de sus funciones, o por particulares que tienen a su cargo la prestación de un servicio público, que puede dar lugar a acción disciplinaria.
+                <br><b>Reclamo:</b> Es una exigencia presentada por cualquier persona ante la ausencia, irregular o mala prestación de un servicio, por una obligación incumplida o por la prestación deficiente de una función a cargo de la Oficina de Atención al Ciudadano. Al igual que en la queja puede dar lugar a acción disciplinaria, de manera que se procede de la forma prevista para aquella.</div>
+              <div *ngIf="asuntoSelected === '57'"><b>Solicitud de información:</b> Es la solicitud que hace un ciudadano con la que busca indagar sobre un hecho, acto o situación administrativa que corresponde a la naturaleza, misión y funciones de la ANSV. Para efectos del tratamiento de datos que la ANSV genere, obtenga, adquiera, transforme deberá dar cumplimiento a lo establecido por la Ley 1712 de 2014, Ley 1581 de 2012 y las normas que las reglamenten, adicionen, sustituyan o modifiquen.</div>
+              <div *ngIf="asuntoSelected === '48'"><b>Denuncia:</b> Manifestación de los ciudadanos sobre conductas irregulares de los servidores públicos de la Entidad con connotación penal, disciplinaria, fiscal o ético-profesional, con el fin de que sean investigadas.</div>
+              <div *ngIf="asuntoSelected === '47'"><b>Sugerencia/Propuesta:</b> Es una de las formas que tiene la entidad para su comunicación entre el ciudadano y ellos, se presenta como una alternativa de participación y de uso que permite hacer un camino hacia la mejora continua de la entidad y afianzamiento del sentido de pertenencia de quienes hacen parte de esta.</div>
+          </ion-col>
+          </ion-row>
+          <span *ngIf="anonimo === 0">
+            <ion-row >
+              <ion-col>
+                Nombre y Apellidos o Razón Social de la Empresa *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-input type="text" [(ngModel)]="todo.nombre" name="nombre"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                ¿Cuál es el tipo de su documento de identidad o el de su empresa? *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.tipoDocumento" name="tipoDocumento" placeholder="Seleccione un tipo documento" (ionChange)="tipoRem($event)">
+                  <ion-select-option selected="selected" value=''>Seleccionar</ion-select-option>
+                  <ion-select-option value='0'>Cédula de ciudadanía</ion-select-option>
+                  <ion-select-option value='5'>NUIP, Número Único de Identificación Personal</ion-select-option>
+                  <ion-select-option value='2'>Cédula de Extranjería</ion-select-option>
+                  <ion-select-option value='4'>NIT</ion-select-option>
+                  <ion-select-option value='3'>Pasaporte</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Número de su documento de identidad o NIT de la empresa *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-input type="text" [(ngModel)]="todo.documento" name="documento"></ion-input>
+              </ion-col>
+            </ion-row>
+
+          <ion-row>
+            <ion-col>
+              Indicar si desea recibir la respuesta por correo electrónico o en la dirección de correspondencia *
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.respuesta" name="respuesta" placeholder="Seleccionar">
+                <ion-select-option value=''>Seleccionar</ion-select-option>
+                <ion-select-option value='3'>Correo electrónico</ion-select-option>
+                <ion-select-option value='1'>Dirección de correspondencia</ion-select-option>
+              </ion-select>
+
+            </ion-col>
+          </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Correo electrónico *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-input type="text" [(ngModel)]="todo.email" name="email"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <b>Dirección de correspondencia *</b>
+              </ion-col>
+            </ion-row>
+
+
+            <ion-row>
+              <ion-col>
+                Dirección
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-input type="text" [(ngModel)]="todo.direccion" name="direccion"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Barrio/ Vereda/ Corregimiento *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-input type="text" [(ngModel)]="todo.barrioVeredaCorregimiento" name="barrioVeredaCorregimiento"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                País *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.pais" name="pais" placeholder="Seleccione un País" (ionChange)="cambiarDepartamento($event)">
+                  <ion-select-option value=''>Seleccione un País</ion-select-option>
+                  <ion-select-option text-wrap *ngFor="let paisUnico of paises" [value]="paisUnico['value']">{{paisUnico['label']}}</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Departamento *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.departamento" name="departamento" placeholder="Seleccione un Departamento" (ionChange)="cambiarCiudad($event)">
+                  <ion-select-option value=''>Seleccione un Departamento</ion-select-option>
+                  <ion-select-option text-wrap *ngFor="let departamentoUnico of departamentos" [value]="departamentoUnico['value']">{{departamentoUnico['label']}}</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Municipio/ Distrito *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-row>
+                  <ion-col>
+                    <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="todo.ciudad" name="ciudad" placeholder="Seleccione una Ciudad" >
+                      <ion-select-option value=''>Seleccione una Ciudad</ion-select-option>
+                      <ion-select-option text-wrap *ngFor="let ciudadUnico of ciudades" [value]="ciudadUnico['value']">{{ciudadUnico['label']}}</ion-select-option>
+                    </ion-select>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                Número de contacto *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-input type="text" [(ngModel)]="todo.numeroContacto" name="numeroContacto"></ion-input>
+              </ion-col>
+            </ion-row>
+          </span>
+          <ion-row>
+            <ion-col>
+              Objeto de su PQRSD *
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-textarea rows="6" cols="20" [(ngModel)]="todo.asunto" name="asunto"></ion-textarea>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              Adjuntar documentos o anexos
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input type="file" [(ngModel)]="todo.adjunto" name="adjunto" accept="application/pdf" (change)="fileChanged($event)"></ion-input>
+              <ion-input type="hidden" [(ngModel)]="todo.fileb64" name="fileb64"></ion-input>
+              <!-- , image/*, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document -->
+            </ion-col>
+          </ion-row>
+          <span *ngIf="anexoExiste === 1">
+            <ion-row>
+              <ion-col>
+                Descripción Anexos *
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-textarea rows="6" cols="20" [(ngModel)]="todo.anexos" name="anexos"></ion-textarea>
+              </ion-col>
+            </ion-row>
+          </span>
+
+          <ion-row>
+            <ion-col>
+              <p align="justify">
+                <b>Aviso de aceptación de condiciones</b>
+                <br><br>
+                Al hacer clic el botón enviar, usted acepta la remisión de la PQRS a la entidad ANSV. Sus datos serán recolectados y tratados conforme con la Política
+                de Tratamiento de Datos. En la opción consulta de PQRSD podrá verificar el estado de la respuesta.
+
+                En caso que la solicitud de información sea de naturaleza de identidad reservada, deberá efectuar el respectivo trámite ante la Procuraduría
+                General de la Nación, haciendo clic en el siguiente link: Procuraduría General de la Nación
+              </p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col >
+              <ion-button type="submit" expand="full">Enviar</ion-button><br><br>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+        <br><br>
+
+      </form>
+    </span>
+
+    <br><br>
+    <span *ngIf="radicadoCreado === 1">
+      <ion-grid>
+
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <div class="bg-primary">RADICADO CREADO CON NÚMERO <h3>{{numeroRadicado}}</h3></div>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <span class="ion-text-left" (click)="verPDF()"><ion-button color="primary" fill="outline" size="small">Ver Archivo</ion-button></span>
+            <span class="ion-text-right" (click)="limpiarFormulario()"><ion-button color="primary" fill="outline" size="small">Crear Nuevo Radicado</ion-button></span>
+            <br>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+    </span>
+
+    <span *ngIf="src === '' && verArchivo === 1" class="claseMensajeError">NO EXISTE ARCHIVO ASOCIADO</span>
+    </ion-card-content>
+
+  </ion-card>
+
+  <span *ngIf="radicadoCreado === 1">
+    <br>
+    <pdf-viewer *ngIf="src !== ''"
+                [src]="src"
+                [render-text]="true"
+                [show-all]="true"
+                [zoom-scale]="'page-fit'"
+                [original-size]="true"
+                [zoom]="1"
+    ></pdf-viewer>
+    <br><br>
+
+
+  </span>
+</ion-content>
+

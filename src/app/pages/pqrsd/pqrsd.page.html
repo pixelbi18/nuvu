@@ -1,0 +1,41 @@
+
+<app-cabecera [tipo]='3'></app-cabecera>
+
+<ion-content  [fullscreen]="true" fullscreen>
+
+  <ion-tabs tabsPlacement="top">
+
+    <ion-tab-bar slot="top">
+
+      <ion-tab-bar slot="top">
+        <ion-tab-button tab="../pqrsd-registro" class="tab-selected" >
+          <ion-icon name="document-text-outline"></ion-icon>
+          <ion-label>Registro</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="pqrsd-consulta" >
+          <ion-icon name="search-circle-outline"></ion-icon>
+          <ion-label>Consulta</ion-label>
+        </ion-tab-button>
+
+      </ion-tab-bar>
+
+
+
+      <!--
+      <ion-tab-button tab="registro" layout="icon-top">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <ion-label>Registro</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="consulta" layout="icon-top" (click)="handleTabClick($event)">
+        <ion-icon name="search-circle-outline"></ion-icon>
+        <ion-label>Consulta </ion-label>
+      </ion-tab-button>
+      -->
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-content>
+
+<app-pie [tipo]='1'></app-pie>
+

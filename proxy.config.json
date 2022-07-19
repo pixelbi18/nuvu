@@ -1,0 +1,12 @@
+{
+  "/apps/*": {
+    "target":"https://ansv.maps.arcgis.com",
+    "secure": false,
+    "logLevel":"debug"
+  },
+  "/Orfeo7/*": {
+    "target":"http://172.23.0.33",
+    "secure": false,
+    "logLevel":"debug"
+  }
+}

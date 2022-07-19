@@ -1,0 +1,151 @@
+
+<app-cabecera [tipo]='1'></app-cabecera>
+
+<ion-content [fullscreen]="true"  > <!-- class="ion-padding" -->
+
+  <div id="container" style="vertical-align:top" style="background-color: white;">
+
+    <div class="ion-padding" style="vertical-align:top" *ngIf="paso === 1">
+			<div class="col-md-11 mt-4">
+				<h2 class="titulo">ESCUELA VIRTUAL DE SEGURIDAD VIAL</h2>
+				<p class="parrafo">¡Bienvenida(o)! En este espacio encuentra recursos educativos digitales para los distintos actores viales: usuarios de la vía, autoridades y entidades aliadas.
+        Establezca su consulta a través de los
+        siguientes listados y pulse el botón Aplicar.</p>
+
+			</div>
+      <form  class="views-exposed-form" accept-charset="UTF-8" (ngSubmit)="consultar()" *ngIf="titulo">
+        <ion-list>
+
+          <ion-item>
+            <ion-input id="tema" name="tema" [(ngModel)]="formulario.tema" placeholder="Buscar por Tema o palabras clave"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="formulario.recurso" name="recurso" placeholder="Buscar por Tipo de Recurso">
+              <ion-select-option value=[]>- Cualquiera -</ion-select-option>
+              <ion-select-option text-wrap *ngFor="let tc of tipoContenido" [value]="tc.field_tipo_de_contenido">{{tc.field_tipo_de_contenido}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+
+            <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="formulario.usuario" name="usuario" placeholder="Buscar por Tipo de Usuario">
+              <ion-select-option value=[]>- Cualquiera -</ion-select-option>
+              <ion-select-option text-wrap *ngFor="let tu of tipoUsuario" [value]="tu.field_tipo_de_usuario_id">{{tu.field_tipo_de_usuario}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+
+            <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="formulario.entidad" name="entidad" placeholder="Buscar por Autoridad, empresa u organización">
+              <ion-select-option value=[]>- Cualquiera -</ion-select-option>
+              <ion-select-option text-wrap *ngFor="let en of entidad" [value]="en.field_aliado_o_autoridad_id">{{en.field_aliado_o_autoridad}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-select interface="action-sheet" ok-text="Seleccionar" cancel-text="Cancelar" [(ngModel)]="formulario.titulo" name="titulo" placeholder="Buscar por el Título">
+              <ion-select-option value=[]>- Cualquiera -</ion-select-option>
+              <ion-select-option text-wrap *ngFor="let ti of titulo" [value]="ti.title">{{ti.title | truncate: '100'}}</ion-select-option><br>
+            </ion-select>
+          </ion-item>
+          <br><br>
+          <ion-button size="default" type="submit" color="secondary" expand="full" >Aplicar</ion-button>
+        </ion-list>
+
+      </form>
+      <div *ngIf="!titulo"><img src="/assets/img/loading.gif"></div>
+
+    </div>
+
+    <div class="ion-padding" style="vertical-align:top" *ngIf="paso === 2">
+      <div *ngIf="!escuela"><img src="/assets/img/loading.gif"></div>
+      <span *ngIf="escuela">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <ion-button size="small" color="secondary" (click)='regresarFormulario()'>
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="3">
+
+            </ion-col>
+            <ion-col size="6">
+              <span class="resultados">Resultados: {{escuela.length}}</span>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+
+        <div *ngFor="let es of escuela">
+        <ion-card >
+          <img src="{{baseUrl}}{{es.field_image}}" />
+          <ion-card-header>
+            <ion-card-subtitle>{{es.field_tipo_de_contenido}}</ion-card-subtitle>
+            <ion-card-title class="tituloCard">{{es.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content [innerHTML]="es.body" class="card-content">
+          </ion-card-content>
+          <ion-row class="card-footer">
+            <ion-col>
+              <ion-button  color="secondary" (click)="leerMas(es)">Leer Más</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card><br>
+        </div>
+      </span>
+    </div>
+
+
+    <div class="ion-padding" style="vertical-align:top" *ngIf="paso === 3">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <ion-button size="small" color="secondary" (click)='regresarListado()'>
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="9">
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <img src="{{baseUrl}}{{recursoSeleccionado.field_image}}" (click)="openRecurso(recursoSeleccionado.field_link)"/>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>{{recursoSeleccionado.field_tipo_de_contenido}}</ion-card-subtitle>
+          <ion-card-title class="tituloCard">{{recursoSeleccionado.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-row class="card-footer">
+          <ion-col>
+            <ion-button  color="secondary" (click)="openRecurso(recursoSeleccionado.field_link)">Ver Recurso</ion-button>
+
+          </ion-col>
+        </ion-row>
+        <ion-card-content [innerHTML]="recursoSeleccionado.body" class="card-content-ampliado">
+        </ion-card-content>
+        <br>
+        <ion-card-title class="tituloCard2">Usuarios de la via</ion-card-title>
+        <ion-card-content [innerHTML]="recursoSeleccionado.field_tipo_de_usuario" class="card-content-normal">
+        </ion-card-content>
+        <br>
+        <ion-card-title class="tituloCard2">Licencia y condiciones de uso</ion-card-title>
+        <ion-card-content [innerHTML]="recursoSeleccionado.field_tipo_de_licencia" class="card-content-normal">
+        </ion-card-content>
+
+        <ion-row class="card-footer">
+          <ion-col>
+            <ion-button  color="secondary" (click)="openRecurso(recursoSeleccionado.field_link)">Ver Recurso</ion-button>
+
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+  </div>
+
+
+</ion-content>
+<app-pie [tipo]='1'></app-pie>
+
+

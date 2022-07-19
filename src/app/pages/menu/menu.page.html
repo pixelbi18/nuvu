@@ -1,0 +1,68 @@
+<ion-content >
+  <ion-slides class="mainSlide"  style="background-color: #01B5E2;">
+    <ion-slide>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12">
+            <ion-text color="light" [routerLink]="['/home']">
+              <h2>BIENVENIDO A LA APP DE LA AGENCIA NACIONAL DE SEGURIDAD VIAL</h2>
+              <br><br>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+
+          <ion-col size="12">
+            <ion-text color="light" [routerLink]="['/home']">
+              <h3>Lo invitamos a navegar en las siguientes opciones:</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+
+          <ion-col size="8">
+            <ion-text color="light" [routerLink]="['/home']">
+              <h2>ESCUELA VIRTUAL DE SEGURIDAD VIAL</h2>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-card class="welcome-card" [routerLink]="['/home']">
+              <ion-img src='assets/img/logoEscuelaMenu.png'></ion-img>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center" >
+          <ion-col size="8">
+            <ion-text color="light" [routerLink]="['/bot']">
+              <h2>PREGUNTALE A PRUDENCIA</h2>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-card class="welcome-card" [routerLink]="['/bot']">
+              <ion-img src='assets/img/prudencia_2.png'></ion-img>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center" >
+          <ion-col size="8">
+            <ion-text color="light" [routerLink]="['/pqrsd']">
+              <h2>RADICA Y CONSULTA PQRSD</h2>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-card class="welcome-card" [routerLink]="['/pqrsd']">
+              <ion-img src='assets/img/pqrsd_menu.png'></ion-img>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+
+
+    </ion-slide>
+  </ion-slides>
+</ion-content>

@@ -1,0 +1,262 @@
+<ion-content class="ion-no-border" [fullscreen]="true" [fullscreen]="true" class="container">
+
+  <ion-card>
+
+    <ion-card-content>
+
+      <!-- <ion-tabs tabsPlacement="top">
+
+        <ion-tab-bar slot="top">
+          <ion-tab-button tab="pqrsd-registro" (click)="limpiarFormulario()">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <ion-label>Registro</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="pqrsd-consulta" class="tab-selected" (click)="limpiarFormulario()">
+            <ion-icon name="search-circle-outline"></ion-icon>
+            <ion-label>Consulta</ion-label>
+          </ion-tab-button>
+
+        </ion-tab-bar>
+      </ion-tabs>
+      -->
+
+      <ion-grid item-start>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="full" color="medium" fill="clear" class="botonRegresar"  (click)="limpiarFormulario();  opcRegistro()" >
+              <ion-icon slot="end" name="document-text-outline"></ion-icon><br>
+                    <ion-label>Registro</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="full"  fill="outline" class="botonRegresar"  (click)="limpiarFormulario();" >
+              <ion-icon slot="end" name="search-circle-outline"></ion-icon><br>
+                    <ion-label>Consulta</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <form  (ngSubmit)="logForm()">
+
+        <ion-grid item-start>
+          <ion-row>
+            <ion-col >
+              Número de Radicado
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input type="text" (keypress)="numeros($event)"  maxLength="14" [(ngModel)]="todo.idRadicado" name="title" ></ion-input>
+
+            </ion-col>
+          </ion-row>
+          <!--<ion-row>
+            <ion-col >
+              Código de Verificación
+            </ion-col>
+          </ion-row>
+           <ion-row>
+            <ion-col>
+              <ion-input type="text" [(ngModel)]="todo.codever" name="title"></ion-input>
+            </ion-col>
+          </ion-row> -->
+          <ion-row>
+            <ion-col >
+              <ion-button type="submit" expand="full">Consultar</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <div>
+                <ion-button color="primary" fill="outline" size="small" (click)="verRadicados()">Ver Radicados Creados</ion-button>
+                <span *ngIf="verListaRadicados === 1">
+                  <ion-list >
+                    <ion-item *ngFor="let item of radicados">
+                      <ion-avatar slot="start">
+                        <img src="../assets/img/pqrsd.png" />
+                      </ion-avatar>
+                      <ion-label (click)="consultarRadicado(item)"><h4>{{item}}</h4></ion-label>
+                    </ion-item>
+                  </ion-list>
+                  <span *ngIf="radicados.length === 0" class="claseMensajeError">Aun no hay radicados creados</span>
+                </span>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+      </form>
+      <div *ngIf="consulta===1"><img src="/assets/img/loading.gif"></div>
+      <div *ngIf="datosPQRSD !== ''">
+      <ion-grid *ngIf="datosPQRSD.message.RADICADO !== '' && datosPQRSD.message.RADICADO !== null">
+
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <div class="bg-primary">INFORMACION DEL DOCUMENTO CON NUMERO DE RADICADO {{datosPQRSD.message.RADICADO}}</div>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <div class="bg-primary">Datos del Remitente</div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Remitente</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.DESTINATARIO}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Departamento</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.DEPARTAMENTO}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Municipio</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.MUNICIPIO}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Dirección</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.DIRECCION}}</div>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <div class="bg-primary">Datos del Radicado</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Radicado</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.RADICADO}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Fecha</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.FECHA_RADICADO}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datosPQRSD.message.RADICADO_ASOCIADO != '' && datosPQRSD.message.RADICADO_ASOCIADO != 0">
+          <ion-col>
+            <div class="negrita">Radicado Asociado</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.RADICADO_ASOCIADO}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div  class="negrita">Asunto</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.ASUNTO}}</div>
+          </ion-col>
+        </ion-row>
+
+
+
+
+        <ion-row>
+          <ion-col>
+            <div  class="negrita">Folios</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.FOLIOS}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datosPQRSD.message.FOLIOS_DIGITALIZADOS != ''">
+          <ion-col>
+            <div  class="negrita">Folios Digitalizados</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.FOLIOS_DIGITALIZADOS}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datosPQRSD.message.DESC_ANEXOS != ''">
+          <ion-col>
+            <div  class="negrita">Anexos</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.DESC_ANEXOS}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datosPQRSD.message.CUENTA_INTERNA != ''">
+          <ion-col>
+            <div  class="negrita">Cuenta Interna</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.CUENTA_INTERNA}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datosPQRSD.message.GUIA != '' || datosPQRSD.message.GUIA != 'null'">
+          <ion-col>
+            <div  class="negrita">Guia</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.GUIA}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="negrita">Nivel de Seguridad</div>
+          </ion-col>
+          <ion-col>
+            <div>{{datosPQRSD.message.NIVEL_SEGURIDAD}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="datosPQRSD.message.ARCHIVO != '' && datosPQRSD.message.ARCHIVO !==  'No tiene imagen Digitalizada'">
+          <ion-col size="12">
+            <div class="ion-text-center" (click)="verPDF()"><ion-button color="primary" fill="outline" size="small">Ver Archivo</ion-button></div>
+            <br>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <span *ngIf="datosPQRSD.message.RADICADO !== '' && verArchivo === 1">
+
+          <pdf-viewer *ngIf="datosPQRSD.message.ARCHIVO !== '' && datosPQRSD.message.ARCHIVO !==  'No tiene imagen Digitalizada'"
+                      [src]="src"
+                      [render-text]="true"
+                      [show-all]="true"
+                      [zoom-scale]="'page-fit'"
+                      [original-size]="true"
+                      [zoom]="1"
+          ></pdf-viewer>
+
+      </span>
+      <span *ngIf="mensajeError !== ''" class="claseMensajeError">{{mensajeError}}</span>
+      <br><br>
+    </div>
+
+    </ion-card-content>
+  </ion-card>
+  <br><br>
+
+</ion-content>
+
+

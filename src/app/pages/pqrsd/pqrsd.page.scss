@@ -1,0 +1,137 @@
+ion-toolbar {
+  --background-color: transparent;
+  --background: transparent;
+  --ion-color-base: transparent !important;
+
+}
+
+ion-img {
+  width: 140px;
+  align-self: right;
+}
+
+ion-icon {
+  cursor: pointer;
+}
+ion-icon:hover {
+  cursor: pointer;
+}
+
+pdf-viewer {
+  display: block;
+  height: 100%;
+}
+
+
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family:'Futura PT';
+}
+h1 {
+  font-size: 16px;
+  font-family: Segoe UI;
+  line-height: 20px;
+  color: whitesmoke;
+  display: table-cell;
+  padding: 13px 0px 0px 20px;
+}
+.heading {
+  background-color: #1D2444;
+  height: 50px;
+}
+.main {
+  margin: 18px;
+  border-radius: 4px;
+}
+
+div[role="form"]{
+  background-color: #0BB5E0;
+}
+#webchat {
+  position: fixed;
+  height: calc(100% - 50px);
+  width: 100%;
+  top: 50px;
+  overflow: hidden;
+}
+.style-positive {
+  background-color: #1D2444;
+  color: white;
+}
+button.ac-pushButton.style-default[aria-label="Facebook"]::before {
+   font-family: "FontAwesome";
+   content: "\f09a";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+   font-weight: 900;
+   font-size:20px;
+   color:#1D2444;
+}
+button.ac-pushButton.style-default[aria-label="Twitter"]::before {
+   font-family: "FontAwesome";
+   content: "\f099";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+   font-weight: 900;
+   font-size:20px;
+   color:#1D2444;
+}
+button.ac-pushButton.style-default[aria-label="Instagram"]::before {
+   font-family: "FontAwesome";
+   content: "\f16d";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+   font-weight: 900;
+   font-size:20px;
+   color:#1D2444;
+}
+button.ac-pushButton.style-default[aria-label="Youtube"]::before {
+   font-family: "FontAwesome";
+   content: "\f167";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+   font-weight: 900;
+   font-size:20px;
+   color:#1D2444;
+}
+button.ac-pushButton {
+  border-radius:10px;
+}
+button.ac-pushButton > div{
+  color:#1D2444;
+}
+button.ac-pushButton[aria-pressed="true"] {
+  background-color:#1D2444 !important;
+}
+button.ac-pushButton[aria-pressed="true"] > div{
+  color:white;
+}
+button.ac-pushButton[aria-pressed="true"]::before{
+  color:white !important;
+}
+.ac-adaptiveCard div div{
+  justify-content: center !important;
+}
+
+.ac-adaptiveCard div div .ac-image{
+  width:150px !important;
+}
+.ac-adaptiveCard div .ac-image{
+  width:600px !important;
+}
+
+
+img{
+  height: 100px;
+  width: 100px;
+
+  text-align: center;
+}
+

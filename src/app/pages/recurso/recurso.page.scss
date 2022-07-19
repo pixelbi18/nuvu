@@ -1,0 +1,23 @@
+ion-toolbar {
+  --background-color: transparent;
+  --background: transparent;
+  --ion-color-base: transparent !important;
+
+}
+
+ion-img {
+  width: 140px;
+  align-self: right;
+}
+
+ion-icon {
+  cursor: pointer;
+}
+ion-icon:hover {
+  cursor: pointer;
+}
+
+pdf-viewer {
+  display: block;
+  height: 100%;
+}

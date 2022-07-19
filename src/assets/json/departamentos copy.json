@@ -1,0 +1,135 @@
+[
+
+  {
+    "value": "91",
+    "label": "Amazonas"
+  },
+  {
+    "value": "5",
+    "label": "Antioquia"
+  },
+  {
+    "value": "81",
+    "label": "Arauca"
+  },
+  {
+    "value": "8",
+    "label": "Atlántico"
+  },
+  {
+    "value": "11",
+    "label": "Bogotá"
+  },
+  {
+    "value": "13",
+    "label": "Bolívar"
+  },
+  {
+    "value": "15",
+    "label": "Boyacá"
+  },
+  {
+    "value": "17",
+    "label": "Caldas"
+  },
+  {
+    "value": "18",
+    "label": "Caquetá"
+  },
+  {
+    "value": "85",
+    "label": "Casanare"
+  },
+  {
+    "value": "19",
+    "label": "Cauca"
+  },
+  {
+    "value": "20",
+    "label": "Cesar"
+  },
+  {
+    "value": "27",
+    "label": "Chocó"
+  },
+  {
+    "value": "23",
+    "label": "Córdoba"
+  },
+  {
+    "value": "25",
+    "label": "Cundinamarca"
+  },
+  {
+    "value": "94",
+    "label": "Guainía"
+  },
+  {
+    "value": "95",
+    "label": "Guaviare"
+  },
+  {
+    "value": "41",
+    "label": "Huila"
+  },
+  {
+    "value": "44",
+    "label": "La Guajira"
+  },
+  {
+    "value": "47",
+    "label": "Magdalena"
+  },
+  {
+    "value": "50",
+    "label": "Meta"
+  },
+  {
+    "value": "52",
+    "label": "Nariño"
+  },
+  {
+    "value": "54",
+    "label": "Norte de Santander"
+  },
+  {
+    "value": "86",
+    "label": "Putumayo"
+  },
+  {
+    "value": "63",
+    "label": "Quindío"
+  },
+  {
+    "value": "66",
+    "label": "Risaralda"
+  },
+  {
+    "value": "88",
+    "label": "San Andrés y Providencia"
+  },
+  {
+    "value": "68",
+    "label": "Santander"
+  },
+  {
+    "value": "70",
+    "label": "Sucre"
+  },
+  {
+    "value": "73",
+    "label": "Tolima"
+  },
+  {
+    "value": "76",
+    "label": "Valle del Cauca"
+  },
+  {
+    "value": "97",
+    "label": "Vaupés"
+  },
+  {
+    "value": "99",
+    "label": "Vichada"
+  }
+]

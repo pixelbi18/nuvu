@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Juntos por la vida</string>
+    <string name="title_activity_main">Juntos por la vida</string>
+    <string name="package_name">com.ansv.oti.app.escuelaansv</string>
+    <string name="custom_url_scheme">com.ansv.oti.app.escuelaansv</string>
+</resources>

@@ -1,7 +1,15 @@
 {
-  "name": "myApp",
+  "name": "Juntos por la vida",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/Orfeo7//Modulos/restn/index.php",
+      "proxyUrl": "http://172.23.0.33"
+    }
+
+  ]
 }
